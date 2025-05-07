@@ -1,14 +1,24 @@
 import streamlit as st
 
-import streamlit as st
+# Inisialisasi session state
+if 'page' not in st.session_state:
+    st.session_state.page = 'home'
+if 'goal' not in st.session_state:
+    st.session_state.goal = ''
+if 'bmi' not in st.session_state:
+    st.session_state.bmi = 0.0
+if 'status' not in st.session_state:
+    st.session_state.status = ''
+if 'age' not in st.session_state:
+    st.session_state.age = 0
 
 # Konfigurasi halaman
 st.set_page_config(page_title="Diet Sehat", page_icon="🍇", layout="centered")
 
-# CSS untuk background gradasi dan style teks
+# CSS untuk background dan teks dengan animasi
 st.markdown("""
     <style>
-        body {
+        .stApp {
             background: linear-gradient(to right, #5dade2, #d2b4de);
         }
         .title {
@@ -17,85 +27,135 @@ st.markdown("""
             font-size: 36px;
             font-weight: bold;
             margin-top: 50px;
+            animation: fadeIn 2s ease-in-out;
         }
-        .button-container {
+        .big-button {
             display: flex;
             justify-content: center;
-            margin-top: 40px;
+            margin-top: 50px;
+        }
+        .stButton > button {
+            font-size: 20px;
+            padding: 0.75em 2em;
+            border-radius: 10px;
+            background-color: #48c9b0;
+            color: white;
+        }
+        /* Animasi fadeIn */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        /* Animasi untuk teks masuk */
+        .fade-in-text {
+            opacity: 0;
+            animation: fadeIn 3s forwards;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Halaman Utama
+# Halaman 1: Home
 def home_page():
-    # Judul Halaman Utama
-    st.markdown("<div class='title'>Jagalah Tubuh Anda dengan Diet yang Sehat!</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title fade-in-text'>🍎 Jagalah Tubuh Anda dengan Diet yang Sehat! 🍇</div>", unsafe_allow_html=True)
 
-    # Tombol "Lanjut"
-    st.markdown("<div class='button-container'>", unsafe_allow_html=True)
+    # Tombol "Lanjut" yang besar dan berada di tengah
+    st.markdown("<div class='big-button'>", unsafe_allow_html=True)
     lanjut = st.button("Lanjut")
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Aksi ketika tombol ditekan
     if lanjut:
-        st.session_state.page = "next_page"  # Menentukan halaman berikutnya setelah klik Lanjut
-        st.experimental_rerun()  # Untuk reload dan pindah ke halaman berikutnya
+        st.session_state.page = "goal"
 
-# Halaman Selanjutnya (Pilih Tujuan Diet)
-def next_page():
-    # Judul Halaman
-    st.markdown("<div class='title'>Apa yang ingin kamu capai?</div>", unsafe_allow_html=True)
-
-    # Menambahkan dua tombol untuk pilihan tujuan
+# Halaman 2: Pilih Tujuan
+def goal_page():
+    st.markdown("<div class='title fade-in-text'>🍌 Apa yang ingin kamu capai? 🍉</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
-
     with col1:
         if st.button("Turun Berat Badan"):
-            st.session_state.page = "bmi_input"  # Halaman untuk input BMI
             st.session_state.goal = "Turun Berat Badan"
-            st.experimental_rerun()
-
+            st.session_state.page = "bmi"
     with col2:
         if st.button("Naik Berat Badan"):
-            st.session_state.page = "bmi_input"  # Halaman untuk input BMI
             st.session_state.goal = "Naik Berat Badan"
-            st.experimental_rerun()
+            st.session_state.page = "bmi"
+    
+    if st.button("← Kembali"):
+        st.session_state.page = "home"
 
-# Halaman untuk Input Indeks Massa Tubuh (BMI)
-def bmi_input_page():
-    # Judul untuk halaman BMI
-    st.markdown("<div class='title'>Masukkan Berat dan Tinggi Badan</div>", unsafe_allow_html=True)
+# Halaman 3: Input BMI + Usia
+def bmi_page():
+    st.markdown("<div class='title fade-in-text'>🍍 Masukkan Berat, Tinggi Badan, dan Usia Anda 🍓</div>", unsafe_allow_html=True)
+    
+    # Input Usia, Berat, dan Tinggi Badan
+    usia = st.number_input("Usia (tahun)", min_value=1, max_value=120, value=25)
+    st.session_state.age = usia
+    berat = st.number_input("Berat badan (kg)", value=70.0)
+    tinggi = st.number_input("Tinggi badan (cm)", value=170.0)
 
-    # Input untuk berat badan dan tinggi badan
-    berat = st.number_input("Berat badan (kg)", min_value=30.0, max_value=200.0, value=70.0)
-    tinggi = st.number_input("Tinggi badan (cm)", min_value=100.0, max_value=250.0, value=170.0)
-
-    if berat > 0 and tinggi > 0:
+    if st.button("Lihat Hasil"):
         tinggi_m = tinggi / 100
         bmi = round(berat / (tinggi_m ** 2), 2)
+        st.session_state.bmi = bmi
 
-        st.markdown(f"### BMI Anda: **{bmi}**")
-
-        # Interpretasi BMI
         if bmi < 18.5:
-            status = "Kurus"
+            st.session_state.status = "Kurus"
         elif 18.5 <= bmi < 25:
-            status = "Normal"
+            st.session_state.status = "Normal"
         elif 25 <= bmi < 30:
-            status = "Gemuk"
+            st.session_state.status = "Gemuk"
         else:
-            status = "Obesitas"
+            st.session_state.status = "Obesitas"
 
-        st.success(f"Status: {status}")
-        st.write(f"Tujuan Anda: {st.session_state.goal}")
+        st.session_state.page = "rekomendasi"
 
-# Logika untuk halaman yang ditampilkan
-if 'page' not in st.session_state:
-    st.session_state.page = "home"
+    if st.button("← Kembali"):
+        st.session_state.page = "goal"
 
+# Halaman 4: Rekomendasi Makanan dengan Takaran per Porsi
+def rekomendasi_page():
+    st.markdown("<div class='title fade-in-text'>🥑 Rekomendasi Makanan 🍊</div>", unsafe_allow_html=True)
+
+    bmi = st.session_state.bmi
+    status = st.session_state.status
+    goal = st.session_state.goal
+    age = st.session_state.age
+
+    st.write(f"**Tujuan:** {goal}")
+    st.write(f"**BMI:** {bmi}")
+    st.write(f"**Status:** {status}")
+    st.write(f"**Usia:** {age} tahun")
+
+    if goal == "Turun Berat Badan":
+        st.subheader("🍽️ Makanan Disarankan (Untuk Turun Berat Badan):")
+        st.markdown(""" 
+        - 🥦 **Sayuran Hijau**: 1 porsi (sekitar 1 cangkir)
+        - 🍗 **Dada Ayam**: 100-150g
+        - 🥣 **Oatmeal**: 1/2 cangkir
+        - 🐟 **Ikan Kukus**: 100-150g
+        - 🍎 **Buah Segar**: 1 buah kecil (misalnya apel, pisang)
+        """)
+    else:
+        st.subheader("🍽️ Makanan Disarankan (Untuk Naik Berat Badan):")
+        st.markdown("""
+        - 🥛 **Susu**: 1 gelas (250ml)
+        - 🍚 **Nasi & Kentang**: 1-1.5 cangkir nasi/kentang
+        - 🍞 **Roti Gandum**: 2 iris
+        - 🥑 **Smoothie**: 1 gelas (300ml)
+        """)
+
+    if st.button("← Kembali"):
+        st.session_state.page = "bmi"
+
+# Routing halaman
 if st.session_state.page == "home":
     home_page()
-elif st.session_state.page == "next_page":
-    next_page()
-elif st.session_state.page == "bmi_input":
-    bmi_input_page()
+elif st.session_state.page == "goal":
+    goal_page()
+elif st.session_state.page == "bmi":
+    bmi_page()
+elif st.session_state.page == "rekomendasi":
+    rekomendasi_page()
