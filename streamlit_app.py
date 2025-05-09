@@ -153,7 +153,7 @@ def rekomendasi_page():
         - 🍌 Pisang – *90 kalori / buah*
         - 🥒 Salad sayuran dengan dressing rendah kalori – *120 kalori / mangkuk*
         """)
-
+        
         st.subheader("🥤 Minuman:")
         st.markdown("""
         - 💧 Air putih – *0 kalori* (wajib 8 gelas/hari)
@@ -162,7 +162,6 @@ def rekomendasi_page():
         - 🥥 Air kelapa murni – *45 kalori / 200 ml*
         - 🍉 Jus semangka tanpa gula – *50 kalori / gelas*
         """)
-
     else:  # Naik Berat Badan
         st.subheader("🍎 Makanan:")
         st.markdown("""
@@ -176,7 +175,7 @@ def rekomendasi_page():
         - 🍳 Telur dadar – *120 kalori / butir*
         - 🥖 Roti isi telur dan keju – *400 kalori / porsi*
         """)
-
+        
         st.subheader("🥤 Minuman:")
         st.markdown("""
         - 🥛 Susu full cream – *150 kalori / gelas*
@@ -187,8 +186,66 @@ def rekomendasi_page():
         - 🥥 Air kelapa + madu – *90–120 kalori*
         """)
 
+    st.markdown("<div class='right-button'>", unsafe_allow_html=True)
+    if st.button("📊 Kalkulator Kalori Harian"):
+        st.session_state.page = "kalkulator_harian"
+    st.markdown("</div>", unsafe_allow_html=True)
+
     if st.button("← Kembali"):
         st.session_state.page = "hasil"
+
+# Halaman 6: Kalkulator Kalori Harian
+def kalkulator_harian_page():
+    food_calories = {
+        "Gado-gado": 250,
+        "Ikan Kukus": 150,
+        "Nasi Merah + Sayur Bening": 200,
+        "Ubi Rebus": 90,
+        "Sup Sayur Bening": 100,
+        "Tumis Bayam": 80,
+        "Telur Rebus": 70,
+        "Pisang": 90,
+        "Salad Sayuran": 120,
+        "Nasi Goreng": 350,
+        "Pecel": 350,
+        "Bakso": 300,
+        "Ayam Goreng": 250,
+        "Kentang Goreng": 300,
+        "Pizza": 280,
+        "Burger": 350,
+        "Sate Ayam": 200,
+        "Ayam Geprek": 400,
+        "Roti Gandum + Selai Kacang": 250,
+        "Tacos": 200,
+        "Bubur Ayam": 350,
+        "Cumi Goreng Tepung": 250,
+        "Sandwich": 350,
+        "Susu Full Cream": 150,
+        "Jus Alpukat": 300,
+        "Cokelat Panas Manis": 180,
+        "Smoothie Pisang + Yogurt": 250,
+        "Susu Kedelai Manis": 140,
+        "Air Kelapa + Madu": 120,
+        "Teh Hijau": 2,
+        "Air Putih": 0,
+    }
+
+    st.markdown("<div class='title fade-in-text'>🍽 Kalkulator Kalori Harian</div>", unsafe_allow_html=True)
+    st.subheader("Pilih makanan dan minuman yang kamu konsumsi:")
+
+    food_selections = list(food_calories.keys())
+    food_choices = st.multiselect("Pilih Makanan dan Minuman", food_selections)
+
+    total_calories = sum([food_calories[food] for food in food_choices])
+
+    st.markdown(f"**Total Kalori: {total_calories} kalori**")
+
+    if st.button("🔄 Hitung Ulang"):
+        total_calories = 0
+        st.experimental_rerun()
+
+    if st.button("← Kembali"):
+        st.session_state.page = "rekomendasi"
 
 # Routing Halaman
 if st.session_state.page == "home":
@@ -201,6 +258,8 @@ elif st.session_state.page == "hasil":
     hasil_bmi_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
+elif st.session_state.page == "kalkulator_harian":
+    kalkulator_harian_page()
 
 
 
