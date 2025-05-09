@@ -13,17 +13,19 @@ if 'age' not in st.session_state:
     st.session_state.age = 0
 
 # Konfigurasi halaman
-st.set_page_config(page_title="Diet Sehat", page_icon="🍇", layout="centered")
+st.set_page_config(page_title="Diet Sehat", page_icon="🌊", layout="centered")
 
-# CSS untuk background dan teks dengan animasi
+# CSS untuk tema air dan animasi
 st.markdown("""
     <style>
         .stApp {
-            background: linear-gradient(to right, #5dade2, #d2b4de);
+            background: linear-gradient(to right, #a2d4f4, #0077be);
+            background-attachment: fixed;
+            font-family: 'Arial', sans-serif;
         }
         .title {
             text-align: center;
-            color: black;
+            color: white;
             font-size: 36px;
             font-weight: bold;
             margin-top: 50px;
@@ -38,19 +40,15 @@ st.markdown("""
             font-size: 20px;
             padding: 0.75em 2em;
             border-radius: 10px;
-            background-color: #48c9b0;
+            background-color: #0099cc;
             color: white;
+            border: none;
         }
         /* Animasi fadeIn */
         @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
-        /* Animasi untuk teks masuk */
         .fade-in-text {
             opacity: 0;
             animation: fadeIn 3s forwards;
@@ -60,19 +58,15 @@ st.markdown("""
 
 # Halaman 1: Home
 def home_page():
-    st.markdown("<div class='title fade-in-text'>🍎 Jagalah Tubuh Anda dengan Diet yang Sehat! 🍇</div>", unsafe_allow_html=True)
-
-    # Tombol "Lanjut" yang besar dan berada di tengah
+    st.markdown("<div class='title fade-in-text'>💧 Jagalah Tubuh Anda dengan Diet yang Sehat! 🌊</div>", unsafe_allow_html=True)
     st.markdown("<div class='big-button'>", unsafe_allow_html=True)
-    lanjut = st.button("Lanjut")
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    if lanjut:
+    if st.button("Lanjut"):
         st.session_state.page = "goal"
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Halaman 2: Pilih Tujuan
 def goal_page():
-    st.markdown("<div class='title fade-in-text'>🍌 Apa yang ingin kamu capai? 🍉</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title fade-in-text'>🌴 Apa yang ingin kamu capai? 🌊</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Turun Berat Badan"):
@@ -82,15 +76,12 @@ def goal_page():
         if st.button("Naik Berat Badan"):
             st.session_state.goal = "Naik Berat Badan"
             st.session_state.page = "bmi"
-    
     if st.button("← Kembali"):
         st.session_state.page = "home"
 
 # Halaman 3: Input BMI + Usia
 def bmi_page():
-    st.markdown("<div class='title fade-in-text'>🍍 Masukkan Berat, Tinggi Badan, dan Usia Anda 🍓</div>", unsafe_allow_html=True)
-    
-    # Input Usia, Berat, dan Tinggi Badan
+    st.markdown("<div class='title fade-in-text'>💦 Masukkan Berat, Tinggi Badan, dan Usia Anda 🐠</div>", unsafe_allow_html=True)
     usia = st.number_input("Usia (tahun)", min_value=1, max_value=120, value=25)
     st.session_state.age = usia
     berat = st.number_input("Berat badan (kg)", value=70.0)
@@ -115,10 +106,9 @@ def bmi_page():
     if st.button("← Kembali"):
         st.session_state.page = "goal"
 
-# Halaman 4: Rekomendasi Makanan dengan Takaran per Porsi
+# Halaman 4: Rekomendasi Makanan
 def rekomendasi_page():
-    st.markdown("<div class='title fade-in-text'>🥑 Rekomendasi Makanan 🍊</div>", unsafe_allow_html=True)
-
+    st.markdown("<div class='title fade-in-text'>🍽️ Rekomendasi Makanan Sehat 🧊</div>", unsafe_allow_html=True)
     bmi = st.session_state.bmi
     status = st.session_state.status
     goal = st.session_state.goal
@@ -130,7 +120,7 @@ def rekomendasi_page():
     st.write(f"**Usia:** {age} tahun")
 
     if goal == "Turun Berat Badan":
-        st.subheader("🍽️ Makanan Disarankan (Untuk Turun Berat Badan):")
+        st.subheader("🌿 Makanan untuk Turun Berat Badan:")
         st.markdown(""" 
         - 🥦 **Sayuran Hijau**: 1 porsi (sekitar 1 cangkir)
         - 🍗 **Dada Ayam**: 100-150g
@@ -139,7 +129,7 @@ def rekomendasi_page():
         - 🍎 **Buah Segar**: 1 buah kecil (misalnya apel, pisang)
         """)
     else:
-        st.subheader("🍽️ Makanan Disarankan (Untuk Naik Berat Badan):")
+        st.subheader("🍞 Makanan untuk Naik Berat Badan:")
         st.markdown("""
         - 🥛 **Susu**: 1 gelas (250ml)
         - 🍚 **Nasi & Kentang**: 1-1.5 cangkir nasi/kentang
@@ -150,7 +140,7 @@ def rekomendasi_page():
     if st.button("← Kembali"):
         st.session_state.page = "bmi"
 
-# Routing halaman
+# Routing
 if st.session_state.page == "home":
     home_page()
 elif st.session_state.page == "goal":
@@ -159,3 +149,4 @@ elif st.session_state.page == "bmi":
     bmi_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
+
