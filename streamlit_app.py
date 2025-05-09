@@ -56,7 +56,7 @@ st.markdown("""
 
 # Halaman 1: Home
 def home_page():
-    st.markdown("<div class='title fade-in-text'>🥗 Diet Sehat Ala Indonesia 🌿</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title fade-in-text'>🥗 Jagalah Tubuh Anda dengan Diet Sehat!!.</div>", unsafe_allow_html=True)
     st.markdown("<div class='big-button'>", unsafe_allow_html=True)
     if st.button("Lanjut"):
         st.session_state.page = "goal"
@@ -151,4 +151,5 @@ elif st.session_state.page == "bmi":
     bmi_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
+
 
