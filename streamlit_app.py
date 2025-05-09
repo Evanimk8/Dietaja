@@ -138,7 +138,11 @@ def hasil_page():
     bmi = st.session_state.bmi
     status = st.session_state.status
 
-    st.subheader(f"✅ BMI: {bmi} — Status: {status}")
+    st.markdown(f"""
+    <div style='font-size:24px; font-weight:bold; color:black; text-align:center;'>
+    ✅ BMI: {bmi} — Status: {status}
+    </div>
+    """, unsafe_allow_html=True)
 
     st.success("Tetap semangat dalam menjalani pola hidup sehat! 💪💚")
 
@@ -203,3 +207,4 @@ elif st.session_state.page == "hasil":
     hasil_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
+
