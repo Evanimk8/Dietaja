@@ -156,13 +156,13 @@ def hasil_page():
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='right-button'>", unsafe_allow_html=True)
-    if st.button("🍽️ Lihat Rekomendasi Makanan"):
+    if st.button("🍽️ Lihat Rekomendasi Makanan & Minuman"):
         st.session_state.page = "rekomendasi"
     st.markdown("</div>", unsafe_allow_html=True)
 
-# Halaman 5: Rekomendasi Makanan
+# Halaman 5: Rekomendasi Makanan dan Minuman
 def rekomendasi_page():
-    st.markdown("<div class='title fade-in-text'>🍽️ Rekomendasi Makanan Sehat</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title fade-in-text'>🍽️ Rekomendasi Makanan & Minuman Sehat</div>", unsafe_allow_html=True)
 
     goal = st.session_state.goal
 
@@ -181,6 +181,17 @@ def rekomendasi_page():
         - 🍌 Buah segar seperti pisang atau pepaya – 100 kalori  
         - 🍜 **Bakso** (1 mangkuk kecil, tanpa mie) – 200 kalori  
         """)
+
+        st.subheader("🍹 Minuman Sehat (Rendah Kalori):")
+        st.markdown("""
+        - 🍋 Air lemon hangat – 5 kalori  
+        - 🥑 Jus alpukat tanpa gula – 160 kalori  
+        - 🍓 Smoothie strawberry & pisang – 150 kalori  
+        - 🥥 Air kelapa muda – 46 kalori  
+        - 🍵 Teh hijau tanpa gula – 2 kalori  
+        - 🍹 Jus jeruk nipis – 45 kalori  
+        """)
+
     else:
         st.subheader("🔼 Makanan Tinggi Kalori Sehat:")
         st.markdown("""
@@ -195,6 +206,16 @@ def rekomendasi_page():
         - 🥜 Pecel + nasi – 450 kalori  
         - 🧀 Roti gandum + keju + susu – 400 kalori  
         - 🍜 **Bakso** (1 mangkuk besar) – 400 kalori  
+        """)
+
+        st.subheader("🍹 Minuman Sehat (Tinggi Kalori):")
+        st.markdown("""
+        - 🍮 Smoothie mangga & yogurt – 250 kalori  
+        - 🍫 Smoothie coklat pisang – 300 kalori  
+        - 🧃 Jus wortel + apel + jahe – 180 kalori  
+        - 🥥 Jus kelapa + madu – 200 kalori  
+        - 🥛 Susu almond tanpa gula – 40 kalori  
+        - 🍯 Teh manis dengan madu – 50 kalori  
         """)
 
     st.markdown("<div class='left-button'>", unsafe_allow_html=True)
@@ -213,5 +234,4 @@ elif st.session_state.page == "hasil":
     hasil_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
-
 
