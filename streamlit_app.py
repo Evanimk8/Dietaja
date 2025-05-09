@@ -15,7 +15,7 @@ if 'age' not in st.session_state:
 # Konfigurasi halaman
 st.set_page_config(page_title="Diet Sehat", page_icon="🍉", layout="centered")
 
-# CSS Styling
+# CSS Styling responsif
 st.markdown("""
     <style>
         .stApp {
@@ -30,10 +30,13 @@ st.markdown("""
         .title {
             text-align: center;
             color: black;
-            font-size: 36px;
+            font-size: 5vw;
             font-weight: bold;
-            margin-top: 50px;
+            margin-top: 30px;
             animation: fadeIn 2s ease-in-out;
+        }
+        @media screen and (min-width: 768px) {
+            .title { font-size: 36px; }
         }
         @keyframes fadeIn {
             0% { opacity: 0; }
@@ -43,25 +46,18 @@ st.markdown("""
             opacity: 0;
             animation: fadeIn 3s forwards;
         }
-        .center-button {
+        .center-button, .right-button, .left-button {
             display: flex;
             justify-content: center;
-            margin: 20px 0;
-        }
-        .right-button {
-            display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            margin: 20px 0;
-        }
-        .left-button {
-            display: flex;
-            justify-content: flex-start;
+            align-items: center;
             margin: 20px 0;
         }
         .stButton > button {
-            font-size: 20px;
-            padding: 0.75em 2em;
+            font-size: 18px;
+            width: 100%;
+            max-width: 300px;
+            padding: 0.6em 1.5em;
             border-radius: 12px;
             background-color: #ff90b3;
             color: white;
@@ -171,45 +167,41 @@ def rekomendasi_page():
     if goal == "Turun Berat Badan":
         st.subheader("🍋 Makanan:")
         st.markdown("""
-        - 🥗 Gado-gado – *250 kalori / 1 mangkuk sedang*
-        - 🐟 Ikan kukus/bakar (tanpa minyak) – *150 kalori / 100g*
-        - 🍚 Nasi merah + sayur bening – *200 kalori / piring*
-        - 🍠 Ubi rebus – *90 kalori / 100g*
-        - 🥣 Sup sayur bening – *100 kalori / mangkuk*
-        - 🥬 Tumis bayam – *80 kalori / porsi kecil*
-        - 🍳 Telur rebus – *70 kalori / butir*
-        - 🍌 Pisang – *90 kalori / buah*
-        - 🥒 Salad sayuran – *120 kalori / mangkuk*
+        - 🥗 Gado-gado – *250 kalori*
+        - 🐟 Ikan kukus – *150 kalori*
+        - 🍚 Nasi merah + sayur bening – *200 kalori*
+        - 🍠 Ubi rebus – *90 kalori*
+        - 🥣 Sup bening – *100 kalori*
+        - 🥬 Tumis bayam – *80 kalori*
+        - 🍳 Telur rebus – *70 kalori*
+        - 🍌 Pisang – *90 kalori*
+        - 🥒 Salad – *120 kalori*
         """)
         st.subheader("🥤 Minuman:")
         st.markdown("""
         - 💧 Air putih – *0 kalori*
-        - 🍵 Teh hijau tanpa gula – *2 kalori*
-        - 🥒 Infused water – *0–5 kalori*
-        - 🥥 Air kelapa – *45 kalori / 200ml*
-        - 🍉 Jus semangka tanpa gula – *50 kalori*
+        - 🍵 Teh hijau – *2 kalori*
+        - 🥒 Infused water – *5 kalori*
+        - 🥥 Air kelapa – *45 kalori*
+        - 🍉 Jus semangka – *50 kalori*
         """)
     else:
         st.subheader("🍎 Makanan:")
         st.markdown("""
-        - 🍛 Nasi putih + tempe/tahu – *400–500 kalori*
+        - 🍛 Nasi + tahu/tempe – *400–500 kalori*
         - 🥜 Pecel – *350 kalori*
         - 🍜 Bakso – *300 kalori*
         - 🍗 Ayam goreng – *250 kalori*
         - 🥪 Roti gandum + selai kacang – *250 kalori*
         - 🥔 Kentang goreng – *300 kalori*
         - 🍲 Bubur ayam – *350 kalori*
-        - 🍳 Telur dadar – *120 kalori*
-        - 🥖 Roti isi telur & keju – *400 kalori*
         """)
         st.subheader("🥤 Minuman:")
         st.markdown("""
         - 🥛 Susu full cream – *150 kalori*
-        - 🥑 Jus alpukat + susu – *250–300 kalori*
-        - 🍫 Cokelat panas manis – *180 kalori*
-        - 🥤 Smoothie pisang + yogurt – *250 kalori*
-        - 🧋 Susu kedelai manis – *140 kalori*
-        - 🥥 Air kelapa + madu – *90–120 kalori*
+        - 🥑 Jus alpukat – *250–300 kalori*
+        - 🍫 Cokelat panas – *180 kalori*
+        - 🥤 Smoothie pisang – *250 kalori*
         """)
 
     if st.button("← Kembali"):
@@ -221,19 +213,17 @@ def rekomendasi_olahraga_page():
     if st.session_state.goal == "Turun Berat Badan":
         st.subheader("🔥 Untuk Menurunkan Berat Badan:")
         st.markdown("""
-        - 🏃‍♂️ Jogging 30–45 menit (3–5x/minggu)
+        - 🏃‍♂️ Jogging 30–45 menit
         - 🚴‍♀️ Bersepeda ringan
-        - 🧘‍♂️ Yoga/pilates
+        - 🧘‍♂️ Yoga
         - 🏊‍♂️ Berenang
-        - 🏋️‍♀️ Latihan kekuatan ringan
         """)
     else:
         st.subheader("💪 Untuk Menaikkan Berat Badan:")
         st.markdown("""
-        - 🏋️‍♂️ Latihan angkat beban
-        - 🤸‍♂️ Push-up, sit-up, dan plank
-        - 🏃‍♂️ Jogging ringan (20–30 menit)
-        - 🍽 Kombinasikan dengan asupan tinggi kalori sehat
+        - 🏋️‍♂️ Latihan beban
+        - 🤸‍♂️ Push-up & plank
+        - 🍽 Makan tinggi kalori sehat
         """)
 
     if st.button("← Kembali"):
