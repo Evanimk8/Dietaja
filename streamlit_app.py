@@ -50,7 +50,8 @@ st.markdown("""
         }
         .right-button {
             display: flex;
-            justify-content: flex-end;
+            flex-direction: column;
+            align-items: flex-end;
             margin: 20px 0;
         }
         .left-button {
@@ -66,6 +67,7 @@ st.markdown("""
             color: white;
             border: none;
             box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+            margin-top: 10px;
         }
         input, .stNumberInput input, .stTextInput input, textarea {
             color: black !important;
@@ -152,6 +154,8 @@ def hasil_bmi_page():
     st.markdown("<div class='right-button'>", unsafe_allow_html=True)
     if st.button("🍽 Rekomendasi Makanan"):
         st.session_state.page = "rekomendasi"
+    if st.button("🏃‍♂️ Rekomendasi Olahraga"):
+        st.session_state.page = "olahraga"
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='left-button'>", unsafe_allow_html=True)
@@ -170,50 +174,71 @@ def rekomendasi_page():
         - 🥗 Gado-gado – *250 kalori / 1 mangkuk sedang*
         - 🐟 Ikan kukus/bakar (tanpa minyak) – *150 kalori / 100g*
         - 🍚 Nasi merah + sayur bening – *200 kalori / piring*
-        - 🍠 Ubi rebus – *90 kalori / 100g* (1–2 potong)
+        - 🍠 Ubi rebus – *90 kalori / 100g*
         - 🥣 Sup sayur bening – *100 kalori / mangkuk*
-        - 🥬 Tumis bayam atau kangkung – *80 kalori / 1 porsi kecil*
+        - 🥬 Tumis bayam – *80 kalori / porsi kecil*
         - 🍳 Telur rebus – *70 kalori / butir*
         - 🍌 Pisang – *90 kalori / buah*
-        - 🥒 Salad sayuran dengan dressing rendah kalori – *120 kalori / mangkuk*
+        - 🥒 Salad sayuran – *120 kalori / mangkuk*
         """)
-
         st.subheader("🥤 Minuman:")
         st.markdown("""
-        - 💧 Air putih – *0 kalori* (wajib 8 gelas/hari)
-        - 🍵 Teh hijau tanpa gula – *2 kalori / cangkir*
-        - 🥒 Infused water (mentimun/lemon) – *0–5 kalori*
-        - 🥥 Air kelapa murni – *45 kalori / 200 ml*
-        - 🍉 Jus semangka tanpa gula – *50 kalori / gelas*
+        - 💧 Air putih – *0 kalori*
+        - 🍵 Teh hijau tanpa gula – *2 kalori*
+        - 🥒 Infused water – *0–5 kalori*
+        - 🥥 Air kelapa – *45 kalori / 200ml*
+        - 🍉 Jus semangka tanpa gula – *50 kalori*
         """)
-    
-    else:  # Naik Berat Badan
+    else:
         st.subheader("🍎 Makanan:")
         st.markdown("""
-        - 🍛 Nasi putih + tempe/tahu goreng – *400–500 kalori / porsi*
-        - 🥜 Pecel (sayur + bumbu kacang) – *350 kalori / porsi*
-        - 🍜 Bakso (4–5 butir sedang) – *300 kalori*
-        - 🍗 Ayam goreng – *250 kalori / potong*
-        - 🥪 Roti gandum + selai kacang – *250 kalori / potong*
-        - 🥔 Kentang goreng/rebus – *300 kalori / 200g*
-        - 🍲 Bubur ayam – *350 kalori / mangkuk*
-        - 🍳 Telur dadar – *120 kalori / butir*
-        - 🥖 Roti isi telur dan keju – *400 kalori / porsi*
+        - 🍛 Nasi putih + tempe/tahu – *400–500 kalori*
+        - 🥜 Pecel – *350 kalori*
+        - 🍜 Bakso – *300 kalori*
+        - 🍗 Ayam goreng – *250 kalori*
+        - 🥪 Roti gandum + selai kacang – *250 kalori*
+        - 🥔 Kentang goreng – *300 kalori*
+        - 🍲 Bubur ayam – *350 kalori*
+        - 🍳 Telur dadar – *120 kalori*
+        - 🥖 Roti isi telur & keju – *400 kalori*
         """)
-
         st.subheader("🥤 Minuman:")
         st.markdown("""
-        - 🥛 Susu full cream – *150 kalori / gelas*
-        - 🥑 Jus alpukat dengan susu – *250–300 kalori / gelas*
-        - 🍫 Cokelat panas manis – *180 kalori / gelas*
+        - 🥛 Susu full cream – *150 kalori*
+        - 🥑 Jus alpukat + susu – *250–300 kalori*
+        - 🍫 Cokelat panas manis – *180 kalori*
         - 🥤 Smoothie pisang + yogurt – *250 kalori*
-        - 🧋 Susu kedelai manis – *140 kalori / gelas*
+        - 🧋 Susu kedelai manis – *140 kalori*
         - 🥥 Air kelapa + madu – *90–120 kalori*
         """)
 
     if st.button("← Kembali"):
         st.session_state.page = "hasil"
-        
+
+# Halaman 6 - Rekomendasi Olahraga
+def rekomendasi_olahraga_page():
+    st.markdown("<div class='title fade-in-text'>🏋️‍♀️ Rekomendasi Olahraga</div>", unsafe_allow_html=True)
+    if st.session_state.goal == "Turun Berat Badan":
+        st.subheader("🔥 Untuk Menurunkan Berat Badan:")
+        st.markdown("""
+        - 🏃‍♂️ Jogging 30–45 menit (3–5x/minggu)
+        - 🚴‍♀️ Bersepeda ringan
+        - 🧘‍♂️ Yoga/pilates
+        - 🏊‍♂️ Berenang
+        - 🏋️‍♀️ Latihan kekuatan ringan
+        """)
+    else:
+        st.subheader("💪 Untuk Menaikkan Berat Badan:")
+        st.markdown("""
+        - 🏋️‍♂️ Latihan angkat beban
+        - 🤸‍♂️ Push-up, sit-up, dan plank
+        - 🏃‍♂️ Jogging ringan (20–30 menit)
+        - 🍽 Kombinasikan dengan asupan tinggi kalori sehat
+        """)
+
+    if st.button("← Kembali"):
+        st.session_state.page = "hasil"
+
 # Routing Halaman
 if st.session_state.page == "home":
     home_page()
@@ -225,3 +250,5 @@ elif st.session_state.page == "hasil":
     hasil_bmi_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
+elif st.session_state.page == "olahraga":
+    rekomendasi_olahraga_page()
