@@ -233,17 +233,20 @@ def kalkulator_harian_page():
     st.markdown("<div class='title fade-in-text'>🍽 Kalkulator Kalori Harian</div>", unsafe_allow_html=True)
     st.subheader("Pilih makanan dan minuman yang kamu konsumsi:")
 
+    # Pilihan makanan dan minuman
     food_selections = list(food_calories.keys())
     food_choices = st.multiselect("Pilih Makanan dan Minuman", food_selections)
 
-    total_calories = sum([food_calories[food] for food in food_choices])
-
-    st.markdown(f"**Total Kalori: {total_calories} kalori**")
-
+    # Tombol untuk menunjukkan hasil kalori
+    if st.button("Tunjukkan Hasil"):
+        total_calories = sum([food_calories[food] for food in food_choices])
+        st.markdown(f"**Total Kalori: {total_calories} kalori**")
+    
+    # Tombol untuk menghitung ulang
     if st.button("🔄 Hitung Ulang"):
-        total_calories = 0
         st.experimental_rerun()
 
+    # Tombol untuk kembali ke halaman rekomendasi
     if st.button("← Kembali"):
         st.session_state.page = "rekomendasi"
 
