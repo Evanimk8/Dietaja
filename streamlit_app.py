@@ -79,7 +79,7 @@ def home_page():
     st.markdown("<div class='title fade-in-text'>🍓 Jagalah Tubuh Anda dengan Diet Sehat!!</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='center-button'>", unsafe_allow_html=True)
-    if st.button("🍊 Lanjut", key="lanjut_home"):
+    if st.button("🍊 Lanjut", key="Yuk Diet!_home"):
         st.session_state.page = "goal"
     st.markdown("</div>", unsafe_allow_html=True)
 
