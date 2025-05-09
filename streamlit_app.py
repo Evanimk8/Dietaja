@@ -143,33 +143,48 @@ def rekomendasi_page():
     if goal == "Turun Berat Badan":
         st.subheader("🍋 Makanan:")
         st.markdown("""
-        - 🥗 Gado-gado (250 kalori per porsi)
-        - 🐟 Ikan kukus/bakar (150 kalori per 100g)
-        - 🍚 Nasi merah + sayur bening (200 kalori)
-        - 🥣 Sup sayur (100 kalori)
-        - 🍠 Ubi rebus (90 kalori)
-        """)
-        st.subheader("🥤 Minuman:")
-        st.markdown("""
-        - 💧 Air putih
-        - 🍵 Teh hijau tanpa gula (2 kalori)
-        - 🥤 Infused water (mentimun, lemon)
+        - 🥗 Gado-gado – *250 kalori / 1 mangkuk sedang*
+        - 🐟 Ikan kukus/bakar (tanpa minyak) – *150 kalori / 100g*
+        - 🍚 Nasi merah + sayur bening – *200 kalori / piring*
+        - 🍠 Ubi rebus – *90 kalori / 100g* (1–2 potong)
+        - 🥣 Sup sayur bening – *100 kalori / mangkuk*
+        - 🥬 Tumis bayam atau kangkung – *80 kalori / 1 porsi kecil*
+        - 🍳 Telur rebus – *70 kalori / butir*
+        - 🍌 Pisang – *90 kalori / buah*
+        - 🥒 Salad sayuran dengan dressing rendah kalori – *120 kalori / mangkuk*
         """)
 
-    else:
-        st.subheader("🍎 Makanan:")
-        st.markdown("""
-        - 🍛 Nasi putih + tempe/tahu goreng (400 kalori)
-        - 🥜 Pecel (350 kalori)
-        - 🥪 Roti gandum + selai kacang (250 kalori)
-        - 🍜 Bakso (4 butir sedang - 300 kalori)
-        - 🍲 Bubur ayam (350 kalori)
-        """)
         st.subheader("🥤 Minuman:")
         st.markdown("""
-        - 🥛 Susu full cream (150 kalori per gelas)
-        - 🥑 Jus alpukat (250 kalori)
-        - 🍫 Cokelat panas (180 kalori)
+        - 💧 Air putih – *0 kalori* (wajib 8 gelas/hari)
+        - 🍵 Teh hijau tanpa gula – *2 kalori / cangkir*
+        - 🥒 Infused water (mentimun/lemon) – *0–5 kalori*
+        - 🥥 Air kelapa murni – *45 kalori / 200 ml*
+        - 🍉 Jus semangka tanpa gula – *50 kalori / gelas*
+        """)
+
+    else:  # Naik Berat Badan
+        st.subheader("🍎 Makanan:")
+        st.markdown("""
+        - 🍛 Nasi putih + tempe/tahu goreng – *400–500 kalori / porsi*
+        - 🥜 Pecel (sayur + bumbu kacang) – *350 kalori / porsi*
+        - 🍜 Bakso (4–5 butir sedang) – *300 kalori*
+        - 🍗 Ayam goreng – *250 kalori / potong*
+        - 🥪 Roti gandum + selai kacang – *250 kalori / potong*
+        - 🥔 Kentang goreng/rebus – *300 kalori / 200g*
+        - 🍲 Bubur ayam – *350 kalori / mangkuk*
+        - 🍳 Telur dadar – *120 kalori / butir*
+        - 🥖 Roti isi telur dan keju – *400 kalori / porsi*
+        """)
+
+        st.subheader("🥤 Minuman:")
+        st.markdown("""
+        - 🥛 Susu full cream – *150 kalori / gelas*
+        - 🥑 Jus alpukat dengan susu – *250–300 kalori / gelas*
+        - 🍫 Cokelat panas manis – *180 kalori / gelas*
+        - 🥤 Smoothie pisang + yogurt – *250 kalori*
+        - 🧋 Susu kedelai manis – *140 kalori / gelas*
+        - 🥥 Air kelapa + madu – *90–120 kalori*
         """)
 
     if st.button("← Kembali"):
@@ -186,3 +201,6 @@ elif st.session_state.page == "hasil":
     hasil_bmi_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
+
+
+
