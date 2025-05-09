@@ -13,15 +13,14 @@ if 'age' not in st.session_state:
     st.session_state.age = 0
 
 # Konfigurasi halaman
-st.set_page_config(page_title="Diet Sehat", page_icon="🌊", layout="centered")
+st.set_page_config(page_title="Diet Sehat", page_icon="🥗", layout="centered")
 
-# CSS untuk tema air dan animasi
+# CSS background air dan animasi
 st.markdown("""
     <style>
         .stApp {
             background: linear-gradient(to right, #a2d4f4, #0077be);
             background-attachment: fixed;
-            font-family: 'Arial', sans-serif;
         }
         .title {
             text-align: center;
@@ -44,7 +43,6 @@ st.markdown("""
             color: white;
             border: none;
         }
-        /* Animasi fadeIn */
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
@@ -58,7 +56,7 @@ st.markdown("""
 
 # Halaman 1: Home
 def home_page():
-    st.markdown("<div class='title fade-in-text'>💧 Jagalah Tubuh Anda dengan Diet yang Sehat! 🌊</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title fade-in-text'>🥗 Diet Sehat Ala Indonesia 🌿</div>", unsafe_allow_html=True)
     st.markdown("<div class='big-button'>", unsafe_allow_html=True)
     if st.button("Lanjut"):
         st.session_state.page = "goal"
@@ -66,7 +64,7 @@ def home_page():
 
 # Halaman 2: Pilih Tujuan
 def goal_page():
-    st.markdown("<div class='title fade-in-text'>🌴 Apa yang ingin kamu capai? 🌊</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title fade-in-text'>🇮🇩 Apa tujuan diet kamu?</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Turun Berat Badan"):
@@ -79,9 +77,9 @@ def goal_page():
     if st.button("← Kembali"):
         st.session_state.page = "home"
 
-# Halaman 3: Input BMI + Usia
+# Halaman 3: Input BMI
 def bmi_page():
-    st.markdown("<div class='title fade-in-text'>💦 Masukkan Berat, Tinggi Badan, dan Usia Anda 🐠</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title fade-in-text'>📏 Masukkan Berat, Tinggi Badan & Usia</div>", unsafe_allow_html=True)
     usia = st.number_input("Usia (tahun)", min_value=1, max_value=120, value=25)
     st.session_state.age = usia
     berat = st.number_input("Berat badan (kg)", value=70.0)
@@ -106,9 +104,9 @@ def bmi_page():
     if st.button("← Kembali"):
         st.session_state.page = "goal"
 
-# Halaman 4: Rekomendasi Makanan
+# Halaman 4: Rekomendasi + Gambar
 def rekomendasi_page():
-    st.markdown("<div class='title fade-in-text'>🍽️ Rekomendasi Makanan Sehat 🧊</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title fade-in-text'>🍱 Rekomendasi Makanan Sehat</div>", unsafe_allow_html=True)
     bmi = st.session_state.bmi
     status = st.session_state.status
     goal = st.session_state.goal
@@ -120,27 +118,31 @@ def rekomendasi_page():
     st.write(f"**Usia:** {age} tahun")
 
     if goal == "Turun Berat Badan":
-        st.subheader("🌿 Makanan untuk Turun Berat Badan:")
-        st.markdown(""" 
-        - 🥦 **Sayuran Hijau**: 1 porsi (sekitar 1 cangkir)
-        - 🍗 **Dada Ayam**: 100-150g
-        - 🥣 **Oatmeal**: 1/2 cangkir
-        - 🐟 **Ikan Kukus**: 100-150g
-        - 🍎 **Buah Segar**: 1 buah kecil (misalnya apel, pisang)
-        """)
-    else:
-        st.subheader("🍞 Makanan untuk Naik Berat Badan:")
+        st.subheader("🥦 Makanan Disarankan:")
         st.markdown("""
-        - 🥛 **Susu**: 1 gelas (250ml)
-        - 🍚 **Nasi & Kentang**: 1-1.5 cangkir nasi/kentang
-        - 🍞 **Roti Gandum**: 2 iris
-        - 🥑 **Smoothie**: 1 gelas (300ml)
+        - 🥗 **Gado-gado** (1 mangkuk)
+        - 🐟 **Ikan bakar** (tanpa minyak berlebih, 100-150g)
+        - 🍚 **Nasi merah & sayur bening** (1 piring sedang)
+        - 🍌 **Buah segar seperti pisang, pepaya**
         """)
+        st.image("https://cdn.antaranews.com/cache/800x533/2020/01/08/gado-gado.jpg", caption="Gado-Gado", use_column_width=True)
+        st.image("https://img.kurio.network/iwkHDB2DoWhRCx94UVCtPzScT6M=/1200x675/filters:quality(80)/article_cover/61fd9c4b-0a68-4608-8ad8-e76a0d2cfaba.jpg", caption="Ikan Bakar", use_column_width=True)
+
+    else:
+        st.subheader("🍛 Makanan Disarankan:")
+        st.markdown("""
+        - 🍛 **Nasi putih + tempe & tahu goreng**
+        - 🥜 **Pecel** (sayur dengan bumbu kacang)
+        - 🍶 **Susu kedelai atau jus alpukat**
+        - 🍞 **Roti gandum + selai kacang**
+        """)
+        st.image("https://img-global.cpcdn.com/recipes/5dd2ef4b4a1b231f/1200x630cq70/photo.jpg", caption="Pecel", use_column_width=True)
+        st.image("https://img.kurio.network/RRkWwQINFBah3-1LRwVrKk7N7-o=/1200x630/filters:quality(80)/article_cover/31fd0e7a-1e1a-4bfb-8085-b22c8baff0c6.jpg", caption="Tempe Tahu", use_column_width=True)
 
     if st.button("← Kembali"):
         st.session_state.page = "bmi"
 
-# Routing
+# Routing halaman
 if st.session_state.page == "home":
     home_page()
 elif st.session_state.page == "goal":
