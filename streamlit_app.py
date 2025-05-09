@@ -53,6 +53,11 @@ st.markdown("""
             justify-content: flex-start;
             margin: 20px 0;
         }
+        .right-button {
+            display: flex;
+            justify-content: flex-end;
+            margin: 20px 0;
+        }
         .stButton > button {
             font-size: 20px;
             padding: 0.75em 2em;
@@ -126,6 +131,12 @@ def bmi_page():
         st.session_state.page = "goal"
     st.markdown("</div>", unsafe_allow_html=True)
 
+    # Tombol lanjut di sebelah kanan
+    st.markdown("<div class='right-button'>", unsafe_allow_html=True)
+    if st.button("➡️ Rekomendasi Makanan"):
+        st.session_state.page = "rekomendasi"
+    st.markdown("</div>", unsafe_allow_html=True)
+
 # Halaman 4: Rekomendasi + Gambar
 def rekomendasi_page():
     st.markdown("<div class='title fade-in-text'>🍒 Rekomendasi Makanan Sehat</div>", unsafe_allow_html=True)
@@ -134,47 +145,5 @@ def rekomendasi_page():
     status = st.session_state.status
     goal = st.session_state.goal
     age = st.session_state.age
-
-    st.write(f"**Tujuan:** {goal}")
-    st.write(f"**BMI:** {bmi}")
-    st.write(f"**Status:** {status}")
-    st.write(f"**Usia:** {age} tahun")
-
-    if goal == "Turun Berat Badan":
-        st.subheader("🍋 Makanan Disarankan:")
-        st.markdown("""
-        - 🥗 **Gado-gado** (1 mangkuk)
-        - 🐟 **Ikan bakar** (tanpa minyak berlebih, 100-150g)
-        - 🍚 **Nasi merah & sayur bening** (1 piring sedang)
-        - 🍌 **Buah segar seperti pisang, pepaya**
-        """)
-        st.image("https://cdn.antaranews.com/cache/800x533/2020/01/08/gado-gado.jpg", caption="Gado-Gado", use_column_width=True)
-        st.image("https://img.kurio.network/iwkHDB2DoWhRCx94UVCtPzScT6M=/1200x675/filters:quality(80)/article_cover/61fd9c4b-0a68-4608-8ad8-e76a0d2cfaba.jpg", caption="Ikan Bakar", use_column_width=True)
-    
-    else:
-        st.subheader("🍎 Makanan Disarankan:")
-        st.markdown("""
-        - 🍛 **Nasi putih + tempe & tahu goreng**
-        - 🥜 **Pecel** (sayur dengan bumbu kacang)
-        - 🍶 **Susu kedelai atau jus alpukat**
-        - 🍞 **Roti gandum + selai kacang**
-        """)
-        st.image("https://img-global.cpcdn.com/recipes/5dd2ef4b4a1b231f/1200x630cq70/photo.jpg", caption="Pecel", use_column_width=True)
-        st.image("https://img.kurio.network/RRkWwQINFBah3-1LRwVrKk7N7-o=/1200x630/filters:quality(80)/article_cover/31fd0e7a-1e1a-4bfb-8085-b22c8baff0c6.jpg", caption="Tempe Tahu", use_column_width=True)
-
-    st.markdown("<div class='left-button'>", unsafe_allow_html=True)
-    if st.button("← Kembali"):
-        st.session_state.page = "bmi"
-    st.markdown("</div>", unsafe_allow_html=True)
-
-# Routing halaman
-if st.session_state.page == "home":
-    home_page()
-elif st.session_state.page == "goal":
-    goal_page()
-elif st.session_state.page == "bmi":
-    bmi_page()
-elif st.session_state.page == "rekomendasi":
-    rekomendasi_page()
 
 
