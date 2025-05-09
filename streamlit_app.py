@@ -77,59 +77,34 @@ st.markdown("""
 # Halaman 1 - Home
 def home_page():
     st.markdown("<div class='title fade-in-text'>🍓 Jagalah Tubuh Anda dengan Diet Sehat!!</div>", unsafe_allow_html=True)
+
     st.markdown("<div class='center-button'>", unsafe_allow_html=True)
-    if st.button("🍊 Lanjut"):
+    if st.button("🍊 Lanjut", key="lanjut_home"):
         st.session_state.page = "goal"
     st.markdown("</div>", unsafe_allow_html=True)
 
     # Kalkulator Kalori Harian
     food_calories = {
-        "Gado-gado": 250,
-        "Ikan Kukus": 150,
-        "Nasi Merah + Sayur Bening": 200,
-        "Ubi Rebus": 90,
-        "Sup Sayur Bening": 100,
-        "Tumis Bayam": 80,
-        "Telur Rebus": 70,
-        "Pisang": 90,
-        "Salad Sayuran": 120,
-        "Nasi Goreng": 350,
-        "Pecel": 350,
-        "Bakso": 300,
-        "Ayam Goreng": 250,
-        "Kentang Goreng": 300,
-        "Pizza": 280,
-        "Burger": 350,
-        "Sate Ayam": 200,
-        "Ayam Geprek": 400,
-        "Roti Gandum + Selai Kacang": 250,
-        "Tacos": 200,
-        "Bubur Ayam": 350,
-        "Cumi Goreng Tepung": 250,
-        "Sandwich": 350,
-        "Susu Full Cream": 150,
-        "Jus Alpukat": 300,
-        "Cokelat Panas Manis": 180,
-        "Smoothie Pisang + Yogurt": 250,
-        "Susu Kedelai Manis": 140,
-        "Air Kelapa + Madu": 120,
-        "Teh Hijau": 2,
+        "Gado-gado": 250, "Ikan Kukus": 150, "Nasi Merah + Sayur Bening": 200,
+        "Ubi Rebus": 90, "Sup Sayur Bening": 100, "Tumis Bayam": 80,
+        "Telur Rebus": 70, "Pisang": 90, "Salad Sayuran": 120, "Nasi Goreng": 350,
+        "Pecel": 350, "Bakso": 300, "Ayam Goreng": 250, "Kentang Goreng": 300,
+        "Pizza": 280, "Burger": 350, "Sate Ayam": 200, "Ayam Geprek": 400,
+        "Roti Gandum + Selai Kacang": 250, "Tacos": 200, "Bubur Ayam": 350,
+        "Cumi Goreng Tepung": 250, "Sandwich": 350, "Susu Full Cream": 150,
+        "Jus Alpukat": 300, "Cokelat Panas Manis": 180, "Smoothie Pisang + Yogurt": 250,
+        "Susu Kedelai Manis": 140, "Air Kelapa + Madu": 120, "Teh Hijau": 2,
         "Air Putih": 0,
     }
 
     st.markdown("<div class='title fade-in-text'>🍽 Kalkulator Kalori Harian</div>", unsafe_allow_html=True)
     st.subheader("Pilih makanan dan minuman yang kamu konsumsi:")
 
-    food_selections = list(food_calories.keys())
-    food_choices = st.multiselect("Pilih Makanan dan Minuman", food_selections)
+    food_choices = st.multiselect("Pilih Makanan dan Minuman", list(food_calories.keys()), key="selected_foods")
 
-    if food_choices:
-        if st.button("🍴 Lihat Hasil"):
-            total_calories = sum([food_calories[food] for food in food_choices])
-            st.markdown(f"**Total Kalori: {total_calories} kalori**")
-    
-    if st.button("← Kembali"):
-        st.session_state.page = "goal"
+    if st.button("🍴 Lihat Hasil", key="lihat_hasil"):
+        total_calories = sum([food_calories[food] for food in food_choices])
+        st.success(f"**Total Kalori: {total_calories} kalori**")
 
 # Halaman 2 - Tujuan Diet
 def goal_page():
