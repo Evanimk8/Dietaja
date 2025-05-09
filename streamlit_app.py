@@ -74,6 +74,9 @@ st.markdown("""
         input, .stNumberInput input, .stTextInput input, textarea {
             background-color: white !important;
         }
+        .stMultiSelect div[data-baseweb="select"] {
+            background-color: #f9e6ff !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
