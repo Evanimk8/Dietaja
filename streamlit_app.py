@@ -15,7 +15,7 @@ if 'age' not in st.session_state:
 # Konfigurasi halaman
 st.set_page_config(page_title="Diet Sehat", page_icon="🍉", layout="centered")
 
-# CSS untuk background dan tombol
+# CSS untuk background lucu dan style tombol
 st.markdown("""
     <style>
         .stApp {
@@ -29,7 +29,7 @@ st.markdown("""
         }
         .title {
             text-align: center;
-            color: #000; /* Ganti ke warna hitam */
+            color: #444;
             font-size: 36px;
             font-weight: bold;
             margin-top: 50px;
@@ -48,11 +48,6 @@ st.markdown("""
             justify-content: center;
             margin: 20px 0;
         }
-        .right-button {
-            display: flex;
-            justify-content: flex-end;
-            margin: 20px 0;
-        }
         .left-button {
             display: flex;
             justify-content: flex-start;
@@ -67,27 +62,42 @@ st.markdown("""
             border: none;
             box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
         }
-        /* Styling input fields */
-        .stNumberInput > div > label {
-            font-size: 18px;
-            color: #000; /* Ganti ke warna hitam */
-        }
-        .stNumberInput input {
-            font-size: 16px;
-            color: #000; /* Ganti ke warna hitam */
-            background-color: #f4f4f4;
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
     </style>
 """, unsafe_allow_html=True)
+
+# Halaman 1: Home
+def home_page():
+    st.markdown("<div class='title fade-in-text'>🍓 Jagalah Tubuh Anda dengan Diet Sehat!!</div>", unsafe_allow_html=True)
+    st.markdown("<div class='center-button'>", unsafe_allow_html=True)
+    if st.button("🍊 Lanjut"):
+        st.session_state.page = "goal"
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# Halaman 2: Pilih Tujuan
+def goal_page():
+    st.markdown("<div class='title fade-in-text'>🍍 Apa tujuan diet kamu?</div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='center-button'>", unsafe_allow_html=True)
+    if st.button("🍌 Turun Berat Badan"):
+        st.session_state.goal = "Turun Berat Badan"
+        st.session_state.page = "bmi"
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='center-button'>", unsafe_allow_html=True)
+    if st.button("🍇 Naik Berat Badan"):
+        st.session_state.goal = "Naik Berat Badan"
+        st.session_state.page = "bmi"
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='left-button'>", unsafe_allow_html=True)
+    if st.button("← Kembali"):
+        st.session_state.page = "home"
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Halaman 3: Input BMI
 def bmi_page():
     st.markdown("<div class='title fade-in-text'>🍉 Masukkan Berat, Tinggi Badan & Usia</div>", unsafe_allow_html=True)
     
-    # Input form untuk Usia, Berat badan, dan Tinggi badan
     usia = st.number_input("Usia (tahun)", min_value=1, max_value=120, value=25)
     st.session_state.age = usia
     berat = st.number_input("Berat badan (kg)", value=70.0)
@@ -109,13 +119,81 @@ def bmi_page():
             st.session_state.status = "Obesitas"
 
         st.session_state.page = "hasil"
-        st.experimental_rerun()  # Menyegarkan halaman setelah menekan tombol
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Tombol Kembali
     st.markdown("<div class='left-button'>", unsafe_allow_html=True)
     if st.button("← Kembali"):
         st.session_state.page = "goal"
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# Halaman 4: Hasil BMI dan Kata Semangat
+def hasil_bmi_page():
+    st.markdown("<div class='title fade-in-text'>🍉 Hasil BMI Anda</div>", unsafe_allow_html=True)
+
+    bmi = st.session_state.bmi
+    status = st.session_state.status
+
+    st.markdown(f"<h3 style='text-align: center; color: black;'>BMI Anda: {bmi}</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style='text-align: center; color: black;'>Status: {status}</h3>", unsafe_allow_html=True)
+
+    st.markdown("<div style='text-align: center; font-size: 20px; color: black;'>Tetap Semangat! Jaga kesehatan tubuhmu! 💪</div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='center-button'>", unsafe_allow_html=True)
+    if st.button("🍒 Lanjutkan ke Rekomendasi Makanan"):
+        st.session_state.page = "rekomendasi"
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='left-button'>", unsafe_allow_html=True)
+    if st.button("← Kembali"):
+        st.session_state.page = "bmi"
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# Halaman 5: Rekomendasi Makanan & Minuman
+def rekomendasi_page():
+    st.markdown("<div class='title fade-in-text'>🍒 Rekomendasi Makanan Sehat</div>", unsafe_allow_html=True)
+
+    bmi = st.session_state.bmi
+    goal = st.session_state.goal
+
+    st.write("**Berikut adalah rekomendasi makanan dan minuman untuk tujuan diet Anda:**")
+    
+    if goal == "Turun Berat Badan":
+        st.subheader("🍋 Makanan Disarankan:")
+        st.markdown("""
+        - 🥗 **Gado-gado** (1 mangkuk) - 150 kalori
+        - 🐟 **Ikan bakar** (tanpa minyak berlebih, 100-150g) - 200 kalori
+        - 🍚 **Nasi merah & sayur bening** (1 piring sedang) - 180 kalori
+        - 🍌 **Buah segar seperti pisang, pepaya** - 100 kalori
+        """)
+
+        st.subheader("🍹 Minuman Disarankan:")
+        st.markdown("""
+        - 🥛 **Susu rendah lemak** - 100 kalori
+        - 🍏 **Jus jeruk segar** - 60 kalori
+        - 🍓 **Smoothie buah** (tanpa gula tambahan) - 150 kalori
+        - 🍶 **Teh hijau** (tanpa gula) - 0 kalori
+        """)
+    
+    elif goal == "Naik Berat Badan":
+        st.subheader("🍎 Makanan Disarankan:")
+        st.markdown("""
+        - 🍛 **Nasi putih + tempe & tahu goreng** - 350 kalori
+        - 🥜 **Pecel** (sayur dengan bumbu kacang) - 250 kalori
+        - 🍶 **Susu kedelai atau jus alpukat** - 200 kalori
+        - 🍞 **Roti gandum + selai kacang** - 300 kalori
+        """)
+
+        st.subheader("🍹 Minuman Disarankan:")
+        st.markdown("""
+        - 🥛 **Susu tinggi kalori** - 150 kalori
+        - 🍏 **Jus mangga segar** - 100 kalori
+        - 🍹 **Smoothie pisang & selai kacang** - 250 kalori
+        - 🍶 **Teh manis** - 80 kalori
+        """)
+
+    st.markdown("<div class='left-button'>", unsafe_allow_html=True)
+    if st.button("← Kembali"):
+        st.session_state.page = "hasil"
         st.experimental_rerun()
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -127,6 +205,6 @@ elif st.session_state.page == "goal":
 elif st.session_state.page == "bmi":
     bmi_page()
 elif st.session_state.page == "hasil":
-    hasil_page()
+    hasil_bmi_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
