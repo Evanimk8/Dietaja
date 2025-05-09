@@ -15,7 +15,7 @@ if 'age' not in st.session_state:
 # Konfigurasi halaman
 st.set_page_config(page_title="Diet Sehat", page_icon="🍉", layout="centered")
 
-# CSS untuk background lucu dan style tombol
+# CSS untuk background dan style
 st.markdown("""
     <style>
         .stApp {
@@ -123,7 +123,7 @@ def bmi_page():
         else:
             st.session_state.status = "Obesitas"
 
-        st.session_state.page = "hasil_bmi"
+        st.session_state.page = "rekomendasi"
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='left-button'>", unsafe_allow_html=True)
@@ -131,31 +131,18 @@ def bmi_page():
         st.session_state.page = "goal"
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Tombol lanjut di sebelah kanan
+# Halaman 4: Hasil BMI + Semangat
+def rekomendasi_page():
+    st.markdown("<div class='title fade-in-text'>🍒 Hasil BMI Kamu</div>", unsafe_allow_html=True)
+
+    st.write(f"**BMI:** {st.session_state.bmi}")
+    st.write(f"**Status:** {st.session_state.status}")
+
+    st.success("💪 Tetap semangat! Diet sehat adalah investasi terbaik untuk masa depan tubuhmu!")
+
     st.markdown("<div class='right-button'>", unsafe_allow_html=True)
-    if st.button("➡️ Lanjutkan ke Rekomendasi Makanan"):
-        st.session_state.page = "hasil_bmi"
-    st.markdown("</div>", unsafe_allow_html=True)
-
-# Halaman 4: Hasil BMI
-def hasil_bmi_page():
-    st.markdown("<div class='title fade-in-text'>🍉 Hasil BMI Anda</div>", unsafe_allow_html=True)
-
-    bmi = st.session_state.bmi
-    status = st.session_state.status
-
-    st.write(f"**BMI:** {bmi}")
-    st.write(f"**Status:** {status}")
-
-    # Menambahkan kata-kata semangat
-    st.markdown("<div class='center-button'>", unsafe_allow_html=True)
-    st.write("🎉 Semangat, kamu pasti bisa! 🌟")
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    # Tombol untuk lanjut ke rekomendasi makanan di sebelah kanan bawah
-    st.markdown("<div class='right-button'>", unsafe_allow_html=True)
-    if st.button("🍎 Lanjut ke Rekomendasi Makanan"):
-        st.session_state.page = "rekomendasi"
+    if st.button("🍽️ Lihat Rekomendasi Makanan"):
+        st.session_state.page = "makanan"
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='left-button'>", unsafe_allow_html=True)
@@ -163,33 +150,61 @@ def hasil_bmi_page():
         st.session_state.page = "bmi"
     st.markdown("</div>", unsafe_allow_html=True)
 
-# Halaman 5: Rekomendasi Makanan (Tanpa Gambar)
-def rekomendasi_page():
-    st.markdown("<div class='title fade-in-text'>🍒 Rekomendasi Makanan Sehat</div>", unsafe_allow_html=True)
-
+# Halaman 5: Rekomendasi Makanan
+def makanan_page():
     goal = st.session_state.goal
 
+    st.markdown("<div class='title fade-in-text'>🍽️ Rekomendasi Makanan Sehat</div>", unsafe_allow_html=True)
+
     if goal == "Turun Berat Badan":
-        st.subheader("🍋 Makanan Disarankan:") 
-        st.markdown(""" 
-        - 🥗 **Gado-gado** (1 mangkuk)
-        - 🐟 **Ikan bakar** (tanpa minyak berlebih, 100-150g)
-        - 🍚 **Nasi merah & sayur bening** (1 piring sedang)
-        - 🍌 **Buah segar seperti pisang, pepaya**
+        st.subheader("Untuk Menurunkan Berat Badan:")
+        st.markdown("""
+        **Makanan Utama:**
+        - 🥗 Gado-gado (tanpa kerupuk & sedikit bumbu kacang)
+        - 🍲 Sup sayur bening (wortel, bayam, brokoli)
+        - 🐟 Ikan panggang atau rebus
+        - 🍚 Nasi merah atau kentang rebus
+        - 🍳 Telur rebus
+        - 🍗 Dada ayam tanpa kulit
+
+        **Camilan Sehat:**
+        - 🍌 Pisang
+        - 🍎 Apel
+        - 🍊 Jeruk
+        - 🥒 Mentimun potong
+        - 🍿 Popcorn tanpa mentega
+
+        **Minuman:**
+        - 💧 Air putih
+        - 🍵 Teh hijau tanpa gula
+        - 🍶 Infused water
         """)
-    
     else:
-        st.subheader("🍎 Makanan Disarankan:") 
-        st.markdown(""" 
-        - 🍛 **Nasi putih + tempe & tahu goreng**
-        - 🥜 **Pecel** (sayur dengan bumbu kacang)
-        - 🍶 **Susu kedelai atau jus alpukat**
-        - 🍞 **Roti gandum + selai kacang**
+        st.subheader("Untuk Menaikkan Berat Badan:")
+        st.markdown("""
+        **Makanan Utama:**
+        - 🍛 Nasi putih + ayam goreng, tempe/tahu goreng
+        - 🍜 Mie rebus dengan telur dan sayuran
+        - 🍲 Sup krim ayam atau kentang
+        - 🧆 Perkedel kentang
+        - 🍞 Roti gandum + selai kacang atau cokelat
+
+        **Camilan Tinggi Kalori:**
+        - 🥜 Kacang-kacangan
+        - 🍫 Dark chocolate
+        - 🍌 Pisang goreng
+        - 🍯 Roti tawar + madu
+        - 🧀 Keju lembaran
+
+        **Minuman:**
+        - 🥛 Susu full cream atau susu kedelai
+        - 🥤 Jus alpukat (dengan susu kental manis)
+        - 🍶 Smoothie pisang + susu + selai kacang
         """)
 
     st.markdown("<div class='left-button'>", unsafe_allow_html=True)
     if st.button("← Kembali"):
-        st.session_state.page = "hasil_bmi"
+        st.session_state.page = "rekomendasi"
     st.markdown("</div>", unsafe_allow_html=True)
 
 # Routing halaman
@@ -199,10 +214,10 @@ elif st.session_state.page == "goal":
     goal_page()
 elif st.session_state.page == "bmi":
     bmi_page()
-elif st.session_state.page == "hasil_bmi":
-    hasil_bmi_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
+elif st.session_state.page == "makanan":
+    makanan_page()
 
 
 
