@@ -144,7 +144,11 @@ def hasil_page():
     </div>
     """, unsafe_allow_html=True)
 
-    st.success("Tetap semangat dalam menjalani pola hidup sehat! 💪💚")
+    st.markdown("""
+    <div style='font-size:20px; font-weight:bold; color:black; text-align:center;'>
+    Tetap semangat dalam menjalani pola hidup sehat! 💪💚
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("<div class='left-button'>", unsafe_allow_html=True)
     if st.button("← Kembali"):
@@ -174,7 +178,8 @@ def rekomendasi_page():
         - 🌽 Jagung rebus – 120 kalori  
         - 🍠 Singkong rebus – 150 kalori  
         - 🥬 Gado-gado tanpa kerupuk – 250 kalori  
-        - 🍌 Buah segar seperti pisang atau pepaya – 100 kalori
+        - 🍌 Buah segar seperti pisang atau pepaya – 100 kalori  
+        - 🍜 **Bakso** (1 mangkuk kecil, tanpa mie) – 200 kalori  
         """)
     else:
         st.subheader("🔼 Makanan Tinggi Kalori Sehat:")
@@ -188,7 +193,8 @@ def rekomendasi_page():
         - 🍗 Dada ayam panggang + minyak zaitun – 250 kalori  
         - 🍞 Pisang + roti tawar + selai kacang – 350 kalori  
         - 🥜 Pecel + nasi – 450 kalori  
-        - 🧀 Roti gandum + keju + susu – 400 kalori
+        - 🧀 Roti gandum + keju + susu – 400 kalori  
+        - 🍜 **Bakso** (1 mangkuk besar) – 400 kalori  
         """)
 
     st.markdown("<div class='left-button'>", unsafe_allow_html=True)
@@ -207,4 +213,5 @@ elif st.session_state.page == "hasil":
     hasil_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
+
 
