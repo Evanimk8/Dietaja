@@ -150,7 +150,7 @@ def hasil_bmi_page():
 
 # Halaman 5: Rekomendasi Makanan & Minuman
 def rekomendasi_page():
-    st.markdown("<div class='title fade-in-text'>🍒 Rekomendasi Makanan Sehat</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title fade-in-text'>🍒 Rekomendasi Makanan dan Minuman Sehat</div>", unsafe_allow_html=True)
 
     bmi = st.session_state.bmi
     goal = st.session_state.goal
