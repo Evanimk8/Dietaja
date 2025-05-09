@@ -15,7 +15,7 @@ if 'age' not in st.session_state:
 # Konfigurasi halaman
 st.set_page_config(page_title="Diet Sehat", page_icon="🍉", layout="centered")
 
-# CSS
+# CSS untuk background dan tombol
 st.markdown("""
     <style>
         .stApp {
@@ -46,6 +46,11 @@ st.markdown("""
         .center-button {
             display: flex;
             justify-content: center;
+            margin: 20px 0;
+        }
+        .right-button {
+            display: flex;
+            justify-content: flex-end;
             margin: 20px 0;
         }
         .left-button {
@@ -97,7 +102,7 @@ def goal_page():
 # Halaman 3: Input BMI
 def bmi_page():
     st.markdown("<div class='title fade-in-text'>🍉 Masukkan Berat, Tinggi Badan & Usia</div>", unsafe_allow_html=True)
-
+    
     usia = st.number_input("Usia (tahun)", min_value=1, max_value=120, value=25)
     st.session_state.age = usia
     berat = st.number_input("Berat badan (kg)", value=70.0)
@@ -118,7 +123,7 @@ def bmi_page():
         else:
             st.session_state.status = "Obesitas"
 
-        st.session_state.page = "rekomendasi"
+        st.session_state.page = "hasil"
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='left-button'>", unsafe_allow_html=True)
@@ -126,54 +131,66 @@ def bmi_page():
         st.session_state.page = "goal"
     st.markdown("</div>", unsafe_allow_html=True)
 
-# Halaman 4: Hasil BMI
-def rekomendasi_page():
-    st.markdown("<div class='title fade-in-text'>📊 Hasil BMI Kamu</div>", unsafe_allow_html=True)
+# Halaman 4: Hasil BMI dan semangat
+def hasil_page():
+    st.markdown("<div class='title fade-in-text'>🍒 Hasil BMI Kamu</div>", unsafe_allow_html=True)
+
     bmi = st.session_state.bmi
     status = st.session_state.status
-    st.subheader(f"📏 BMI Anda: **{bmi}**")
-    st.subheader(f"🩺 Status: **{status}**")
-    st.success("💪 Tetap semangat! Dengan pola makan sehat dan gaya hidup aktif, kamu bisa capai tujuanmu!")
 
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        if st.button("← Kembali"):
-            st.session_state.page = "bmi"
-    with col2:
-        if st.button("🍽️ Lihat Rekomendasi Makanan"):
-            st.session_state.page = "makanan"
+    st.subheader(f"✅ BMI: {bmi} — Status: {status}")
+
+    st.success("Tetap semangat dalam menjalani pola hidup sehat! 💪💚")
+
+    st.markdown("<div class='left-button'>", unsafe_allow_html=True)
+    if st.button("← Kembali"):
+        st.session_state.page = "bmi"
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='right-button'>", unsafe_allow_html=True)
+    if st.button("🍽️ Lihat Rekomendasi Makanan"):
+        st.session_state.page = "rekomendasi"
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Halaman 5: Rekomendasi Makanan
-def makanan_page():
-    st.markdown("<div class='title fade-in-text'>🍱 Rekomendasi Makanan Sehat</div>", unsafe_allow_html=True)
+def rekomendasi_page():
+    st.markdown("<div class='title fade-in-text'>🍽️ Rekomendasi Makanan Sehat</div>", unsafe_allow_html=True)
 
-    if st.session_state.goal == "Turun Berat Badan":
-        st.subheader("🍋 Makanan Disarankan (Rendah Kalori):")
+    goal = st.session_state.goal
+
+    if goal == "Turun Berat Badan":
+        st.subheader("🔽 Makanan Rendah Kalori:")
         st.markdown("""
-        - 🥗 **Gado-gado**: Sayur + bumbu kacang (200 kalori per mangkuk)
-        - 🐟 **Ikan kukus/bakar**: 100-150g (180 kalori)
-        - 🍚 **Nasi merah + sayur bening**: (250 kalori)
-        - 🍌 **Buah segar (pisang/pepaya/apel)**: (80-100 kalori per buah)
-        - 🍲 **Sup bening sayur + tahu**: (150 kalori)
-        - 🥚 **Telur rebus**: 1 butir (78 kalori)
-        - 🍠 **Ubi rebus**: 1 buah sedang (120 kalori)
-        - 🥬 **Tumis kangkung tanpa minyak berlebih**: (100 kalori)
+        - 🥗 Salad sayur (selada, wortel, tomat) – 100 kalori  
+        - 🥚 Putih telur rebus (3 butir) – 51 kalori  
+        - 🐟 Tuna kaleng tanpa minyak (85g) – 120 kalori  
+        - 🍄 Tumis jamur tiram + bawang putih – 90 kalori  
+        - 🍲 Sop ayam tanpa kulit + sayur – 180 kalori  
+        - 🍵 Smoothie hijau (bayam, timun, apel hijau) – 110 kalori  
+        - 🌽 Jagung rebus – 120 kalori  
+        - 🍠 Singkong rebus – 150 kalori  
+        - 🥬 Gado-gado tanpa kerupuk – 250 kalori  
+        - 🍌 Buah segar seperti pisang atau pepaya – 100 kalori
         """)
     else:
-        st.subheader("🍎 Makanan Disarankan (Tinggi Kalori Sehat):")
+        st.subheader("🔼 Makanan Tinggi Kalori Sehat:")
         st.markdown("""
-        - 🍛 **Nasi putih + tempe goreng**: (400 kalori)
-        - 🥜 **Pecel (sayur + bumbu kacang)**: (350 kalori)
-        - 🍶 **Jus alpukat tanpa gula**: (200 kalori)
-        - 🍞 **Roti gandum + selai kacang**: (300 kalori)
-        - 🍗 **Ayam panggang + kentang rebus**: (450 kalori)
-        - 🧀 **Omelet telur + keju**: (350 kalori)
-        - 🥣 **Bubur kacang hijau santan**: (250 kalori)
-        - 🥛 **Susu full cream**: 1 gelas (150 kalori)
+        - 🍛 Nasi uduk + telur dadar + tempe – 550 kalori  
+        - 🥑 Alpukat utuh + madu – 250 kalori  
+        - 🥜 Kacang tanah sangrai (1 genggam) – 170 kalori  
+        - 🧆 Perkedel kentang + telur – 300 kalori  
+        - 🧈 Oatmeal + susu full cream + madu – 400 kalori  
+        - 🧃 Smoothie pisang + susu + kacang almond – 350 kalori  
+        - 🍗 Dada ayam panggang + minyak zaitun – 250 kalori  
+        - 🍞 Pisang + roti tawar + selai kacang – 350 kalori  
+        - 🥜 Pecel + nasi – 450 kalori  
+        - 🧀 Roti gandum + keju + susu – 400 kalori
         """)
 
+    st.markdown("<div class='left-button'>", unsafe_allow_html=True)
     if st.button("← Kembali"):
-        st.session_state.page = "rekomendasi"
+        st.session_state.page = "hasil"
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Routing halaman
 if st.session_state.page == "home":
@@ -182,7 +199,7 @@ elif st.session_state.page == "goal":
     goal_page()
 elif st.session_state.page == "bmi":
     bmi_page()
+elif st.session_state.page == "hasil":
+    hasil_page()
 elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
-elif st.session_state.page == "makanan":
-    makanan_page()
