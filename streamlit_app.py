@@ -259,9 +259,9 @@ elif st.session_state.page == "olahraga":
 
 # Watermark
 st.markdown("""
-    <hr style="margin-top: 50px;"/>
-    <div style='text-align: center; color: #666; font-size: 14px; font-style: italic; background-color: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px dashed #ccc;'>
-        📌 <strong>Watermark:</strong> dibuat oleh <u>Evani Mahesa</u>, <u>R. Devina</u>, <u>Muhazzib Raiffan</u>, <u>Aisyah</u>, dan <u>Zahra Aulia</u> – <em>Kelompok 11</em>
+    <hr style="margin-top: 50px;" />
+    <div style='text-align: center; font-family: "Comic Sans MS", cursive, sans-serif; color: #cc3aad; font-size: 15px; background-color: #fff0f5; padding: 12px; border-radius: 12px; border: 2px dotted #ff90b3;'>
+        🍓 dibuat oleh <u>Evani Mahesa</u>, <u>R. Devina</u>, <u>Muhazzib Raiffan</u>, <u>Aisyah</u>, dan <u>Zahra Aulia</u> ✨ – <strong>Kelompok 11</strong> 🍉
     </div>
 """, unsafe_allow_html=True)
 
