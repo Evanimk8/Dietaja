@@ -257,10 +257,34 @@ elif st.session_state.page == "rekomendasi":
 elif st.session_state.page == "olahraga":
     rekomendasi_olahraga_page()
 
-# Watermark
+# Watermark lucu dan mendukung dark mode
 st.markdown("""
-    <hr style="margin-top: 50px;" />
-    <div style='text-align: center; font-family: "Comic Sans MS", cursive, sans-serif; color: #cc3aad; font-size: 15px; background-color: #fff0f5; padding: 12px; border-radius: 12px; border: 2px dotted #ff90b3;'>
+    <style>
+        .custom-watermark {
+            text-align: center;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-size: 15px;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px dotted #ff90b3;
+            margin-top: 40px;
+        }
+        @media (prefers-color-scheme: light) {
+            .custom-watermark {
+                color: #cc3aad;
+                background-color: #fff0f5;
+            }
+        }
+        @media (prefers-color-scheme: dark) {
+            .custom-watermark {
+                color: #ffc0f0;
+                background-color: #2b2b2b;
+                border-color: #ff90b3;
+            }
+        }
+    </style>
+
+    <div class="custom-watermark">
         🍓 dibuat oleh <u>Evani Mahesa</u>, <u>R. Devina</u>, <u>Muhazzib Raiffan</u>, <u>Aisyah</u>, dan <u>Zahra Aulia</u> ✨ – <strong>Kelompok 11</strong> 🍉
     </div>
 """, unsafe_allow_html=True)
