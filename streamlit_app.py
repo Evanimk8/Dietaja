@@ -15,11 +15,11 @@ if 'age' not in st.session_state:
 # Konfigurasi halaman
 st.set_page_config(page_title="Diet Sehat", page_icon="🍉", layout="centered")
 
-# CSS Styling
+# CSS Styling (dark mode friendly)
 st.markdown("""
     <style>
         * {
-            color: black !important;
+            color: inherit !important;
         }
         .stApp {
             background-color: #fefefe;
@@ -110,7 +110,7 @@ def home_page():
 
     if st.button("🍴 Lihat Hasil", key="lihat_hasil"):
         total_calories = sum([food_calories[food] for food in food_choices])
-        st.markdown(f"<h3 style='color:black;'>🔥 Total Kalori: {total_calories} kalori</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='color:inherit;'>🔥 Total Kalori: {total_calories} kalori</h3>", unsafe_allow_html=True)
 
 # Halaman 2 - Tujuan Diet
 def goal_page():
@@ -152,8 +152,8 @@ def bmi_page():
 # Halaman 4 - Hasil BMI
 def hasil_bmi_page():
     st.markdown("<div class='title fade-in-text'>📊 Hasil BMI Kamu</div>", unsafe_allow_html=True)
-    st.markdown(f"<h3 style='color:black;'>BMI: {st.session_state.bmi} ({st.session_state.status})</h3>", unsafe_allow_html=True)
-    st.markdown(f"<h4 style='color:black;'>💡 Tetap semangat! Setiap langkah kecil berarti untuk kesehatanmu 💪</h4>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style='color:inherit;'>BMI: {st.session_state.bmi} ({st.session_state.status})</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style='color:inherit;'>💡 Tetap semangat! Setiap langkah kecil berarti untuk kesehatanmu 💪</h4>", unsafe_allow_html=True)
 
     st.markdown("<div class='right-button'>", unsafe_allow_html=True)
     if st.button("🍽 Rekomendasi Makanan"):
