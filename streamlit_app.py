@@ -256,3 +256,11 @@ elif st.session_state.page == "rekomendasi":
     rekomendasi_page()
 elif st.session_state.page == "olahraga":
     rekomendasi_olahraga_page()
+
+# Watermark
+st.markdown("""
+    <hr style="margin-top: 50px;"/>
+    <div style='text-align: center; color: grey; font-size: 14px; padding-bottom: 10px;'>
+        dibuat oleh Evani Mahesa, R.Devina, Muhazzib Raiffan, Aisyah, dan Zahra Aulia. Kelompok 11
+    </div>
+""", unsafe_allow_html=True)
