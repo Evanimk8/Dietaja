@@ -18,11 +18,11 @@ st.set_page_config(page_title="Diet Sehat", page_icon="🍉", layout="centered")
 # CSS Styling
 st.markdown("""
     <style>
-        * {
-            color: black !important;
+        body, .stApp {
+            background-color: #f9f9f9 !important;
+            color: #222 !important;
         }
         .stApp {
-            background-color: #fefefe;
             background-image: radial-gradient(#ffd6d6 2px, transparent 2px),
                               radial-gradient(#d6ffe7 2px, transparent 2px),
                               radial-gradient(#d6e0ff 2px, transparent 2px);
@@ -36,6 +36,7 @@ st.markdown("""
             font-weight: bold;
             margin-top: 50px;
             animation: fadeIn 2s ease-in-out;
+            color: #333 !important;
         }
         @keyframes fadeIn {
             0% { opacity: 0; }
@@ -70,12 +71,18 @@ st.markdown("""
             border: none;
             box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
             margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .stButton > button:hover {
+            background-color: #ff6b9c;
         }
         input, .stNumberInput input, .stTextInput input, textarea {
             background-color: white !important;
+            color: #222 !important;
         }
         .stMultiSelect div[data-baseweb="select"] {
             background-color: #f9e6ff !important;
+            color: #222 !important;
         }
     </style>
 """, unsafe_allow_html=True)
