@@ -160,7 +160,16 @@ def bmi_page():
 def hasil_bmi_page():
     st.markdown("<div class='title fade-in-text'>📊 Hasil BMI Kamu</div>", unsafe_allow_html=True)
     st.markdown(f"<h3 style='color:black;'>BMI: {st.session_state.bmi} ({st.session_state.status})</h3>", unsafe_allow_html=True)
-    st.markdown(f"<h4 style='color:black;'>💡 Tetap semangat! Setiap langkah kecil berarti untuk kesehatanmu 💪</h4>", unsafe_allow_html=True)
+
+    # Tambahkan deskripsi sesuai status
+    if st.session_state.status == "Kurus":
+        st.markdown("<p style='color:black;'>📌 Berat badan anda tergolong <strong>Kurus</strong>. Sebaiknya anda mengonsumsi makanan yang sehat.  Berikut rekomendasi makanan dan olahraga yang dapat anda ikuti ! Semangat!🔥 </p>", unsafe_allow_html=True)
+    elif st.session_state.status == "Normal":
+        st.markdown("<p style='color:black;'>✅ <strong>Baguss!!</strong> Berat badan anda Ideal. Sebaiknya anda dapat mempertahankan. Berikut rekomendasi makanan rendah kalori dan olahraga yang dapat anda ikuti! Semangat!🔥</p>", unsafe_allow_html=True)
+    elif st.session_state.status == "Gemuk":
+        st.markdown("<p style='color:black;'>⚠️ Berat badan anda tergolong <strong>Gemuk</strong>. Sebaiknya anda mengonsumsi makanan yang rendah kalori. Berikut rekomendasi makanan dan olahraga yang dapat anda ikuti! Semangat!🔥</p>", unsafe_allow_html=True)
+    else:
+        st.markdown("<p style='color:black;'>⚠️ Berat badan anda tergolong <strong>Obesitas</strong>. Penting untuk menjaga pola makan sehat dan olahraga. Silakan cek rekomendasi dari kami!</p>", unsafe_allow_html=True)
 
     st.markdown("<div class='right-button'>", unsafe_allow_html=True)
     if st.button("🍽 Rekomendasi Makanan"):
@@ -173,13 +182,14 @@ def hasil_bmi_page():
     if st.button("← Kembali"):
         st.session_state.page = "bmi"
     st.markdown("</div>", unsafe_allow_html=True)
-
+    
 # Halaman 5 - Rekomendasi Makanan
 def rekomendasi_page():
     goal = st.session_state.goal
     st.markdown("<div class='title fade-in-text'>🍱 Rekomendasi Makanan & Minuman</div>", unsafe_allow_html=True)
 
     if goal == "Turun Berat Badan":
+        st.markdown("<p style='color:black;'>Berikut rekomendasi makanan yang dapat anda konsumsi!</p>", unsafe_allow_html=True)
         st.subheader("🍋 Makanan:")
         st.markdown("""
         - 🥗 Gado-gado – *250 kalori / 1 mangkuk sedang*
@@ -187,28 +197,67 @@ def rekomendasi_page():
         - 🍚 Nasi merah + sayur bening – *200 kalori / piring*
         - 🍠 Ubi rebus – *90 kalori / 100g*
         - 🥣 Sup sayur bening – *100 kalori / mangkuk*
-        - 🥬 Tumis bayam – *80 kalori / porsi kecil*
+        - 🦬 Tumis bayam – *80 kalori / porsi kecil*
         - 🍳 Telur rebus – *70 kalori / butir*
         - 🍌 Pisang – *90 kalori / buah*
-        - 🥒 Salad sayuran – *120 kalori / mangkuk*
+        - 🦒 Salad sayuran – *120 kalori / mangkuk*
         """)
         st.subheader("🥤 Minuman:")
         st.markdown("""
         - 💧 Air putih – *0 kalori*
         - 🍵 Teh hijau tanpa gula – *2 kalori*
-        - 🥒 Infused water – *0–5 kalori*
+        - 🦒 Infused water – *0–5 kalori*
         - 🥥 Air kelapa – *45 kalori / 200ml*
         - 🍉 Jus semangka tanpa gula – *50 kalori*
         """)
+        st.markdown("<p style='color:black;'>Berikut makanan yang harus anda hindari!</p>", unsafe_allow_html=True)
+        st.markdown("""
+        - 🍟 Kentang goreng – *312 kalori / 100g*
+        - 🍕 Pizza – *266 kalori / potong sedang*
+        - 🍔 Burger – *295 kalori / porsi*
+        - 🍗 Ayam goreng berlemak – *320 kalori / potong*
+        - 🥤 Minuman bersoda – *140 kalori / 330ml*
+        - 🍰 Kue dan makanan manis berlebih – *300-450 kalori / potong*
+        - 🍜 Mie instan – *350 kalori / bungkus*
+        """)
+
+    elif goal == "Normal":
+        st.markdown("<p style='color:black;'>Berikut rekomendasi makanan yang dapat anda konsumsi!</p>", unsafe_allow_html=True)
+        st.subheader("🍽️ Makanan:")
+        st.markdown("""
+        - 🍚 Nasi putih + sayur + lauk seimbang – *500–600 kalori*
+        - 🐟 Ikan bakar + tumis sayur – *400–500 kalori*
+        - 🥗 Salad dengan telur rebus dan sedikit dressing – *200–300 kalori*
+        - 🥣 Sup ayam sayur – *250 kalori*
+        - 🍞 Roti gandum + telur rebus – *250–300 kalori*
+        - 🍌 Buah-buahan segar (pisang, apel, pepaya) – *90–120 kalori / buah*
+        """)
+        st.subheader("🥤 Minuman:")
+        st.markdown("""
+        - 💧 Air putih – *0 kalori*
+        - 🍵 Teh tawar atau teh hijau – *2 kalori*
+        - 🥤 Smoothie buah tanpa gula – *150–200 kalori*
+        - 🥛 Susu rendah lemak – *100–120 kalori*
+        """)
+        st.markdown("<p style='color:black;'>Berikut makanan yang harus anda hindari!</p>", unsafe_allow_html=True)
+        st.markdown("""
+        - 🍩 Donat manis – *300–400 kalori / buah*
+        - 🧁 Kue tinggi gula dan lemak – *350–450 kalori / potong*
+        - 🥤 Minuman bersoda – *140 kalori / 330ml*
+        - 🍕 Makanan cepat saji tinggi lemak – *350–500 kalori / porsi*
+        - 🍜 Mie instan – *350 kalori / bungkus*
+        """)
+
     else:
+        st.markdown("<p style='color:black;'>Berikut rekomendasi makanan yang dapat anda konsumsi!</p>", unsafe_allow_html=True)
         st.subheader("🍎 Makanan:")
         st.markdown("""
         - 🍛 Nasi putih + tempe/tahu – *400–500 kalori*
         - 🥜 Pecel – *350 kalori*
         - 🍜 Bakso – *300 kalori*
         - 🍗 Ayam goreng – *250 kalori*
-        - 🥪 Roti gandum + selai kacang – *250 kalori*
-        - 🥔 Kentang goreng – *300 kalori*
+        - 🥬 Roti gandum + selai kacang – *250 kalori*
+        - 🍔 Kentang goreng – *300 kalori*
         - 🍲 Bubur ayam – *350 kalori*
         - 🍳 Telur dadar – *120 kalori*
         - 🥖 Roti isi telur & keju – *400 kalori*
@@ -219,8 +268,17 @@ def rekomendasi_page():
         - 🥑 Jus alpukat + susu – *250–300 kalori*
         - 🍫 Cokelat panas manis – *180 kalori*
         - 🥤 Smoothie pisang + yogurt – *250 kalori*
-        - 🧋 Susu kedelai manis – *140 kalori*
+        - 🥋 Susu kedelai manis – *140 kalori*
         - 🥥 Air kelapa + madu – *90–120 kalori*
+        """)
+        st.markdown("<p style='color:black;'>Berikut makanan yang harus anda hindari!</p>", unsafe_allow_html=True)
+        st.markdown("""
+        - 🍬 Permen berlebihan – *60–90 kalori / permen besar*
+        - 🍟 Junk food tanpa nilai gizi – *300–400 kalori / porsi*
+        - 🍕 Makanan instan dan cepat saji – *350–500 kalori / porsi*
+        - 🥤 Minuman manis berlebihan – *120–200 kalori / gelas*
+        - 🍩 Donat dan kue manis – *250–400 kalori / buah/potong*
+        - 🍶 Minuman beralkohol – *120–150 kalori / gelas*
         """)
 
     if st.button("← Kembali"):
