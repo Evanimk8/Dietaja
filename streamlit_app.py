@@ -219,6 +219,11 @@ def rekomendasi_page():
         - 🥤 Minuman bersoda – *140 kalori / 330ml*
         - 🍰 Kue dan makanan manis berlebih – *300-450 kalori / potong*
         - 🍜 Mie instan – *350 kalori / bungkus*
+        - 🍩 Donat – *300–400 kalori / buah*
+        - 🍫 Cokelat batangan – *230–250 kalori / batang kecil*
+        - 🧁 Cupcake – *350 kalori / buah*
+        - 🥓 Daging olahan (sosis, nugget) – *270–350 kalori / porsi*
+        - 🥡 Makanan cepat saji – *500–700 kalori / porsi*
         """)
 
     elif goal == "Normal":
@@ -246,6 +251,10 @@ def rekomendasi_page():
         - 🥤 Minuman bersoda – *140 kalori / 330ml*
         - 🍕 Makanan cepat saji tinggi lemak – *350–500 kalori / porsi*
         - 🍜 Mie instan – *350 kalori / bungkus*
+        - 🍫 Cokelat susu – *230 kalori / batang*
+        - 🥓 Daging berlemak tinggi (sapi/olahan) – *300–400 kalori / porsi*
+        - 🍰 Es krim tinggi gula – *250–350 kalori / scoop*
+        - 🧃 Minuman kemasan manis – *120–180 kalori / 250ml*
         """)
 
     else:
@@ -279,7 +288,12 @@ def rekomendasi_page():
         - 🥤 Minuman manis berlebihan – *120–200 kalori / gelas*
         - 🍩 Donat dan kue manis – *250–400 kalori / buah/potong*
         - 🍶 Minuman beralkohol – *120–150 kalori / gelas*
+        - 🧁 Cupcake dan brownies – *350–450 kalori / potong*
+        - 🍫 Cokelat batangan – *230–250 kalori / batang kecil*
+        - 🥓 Sosis/nugget goreng – *270–350 kalori / porsi*
+        - 🍦 Es krim tinggi lemak – *250–350 kalori / scoop*
         """)
+
 
     if st.button("← Kembali"):
         st.session_state.page = "hasil"
